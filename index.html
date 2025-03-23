@@ -754,5 +754,291 @@
             </div>
         </div>
     </footer>
+    <script>
+        // 1. Animasyonlu Hizmet Kartları
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 76, 140, 0.2)';
+            
+            // İkon animasyonu
+            const icon = this.querySelector('.service-icon i');
+            icon.style.transform = 'scale(1.2)';
+            icon.style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+            
+            // İkon animasyonunu sıfırla
+            const icon = this.querySelector('.service-icon i');
+            icon.style.transform = 'scale(1)';
+        });
+    });
+});
+
+// 2. Form Doğrulama ve Gönderim İşlemleri
+document.addEventListener('DOMContentLoaded', function() {
+    const helpForm = document.querySelector('.help-form form');
+    
+    if (helpForm) {
+        helpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form alanlarını kontrol et
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            // Basit doğrulama
+            if (!name || !email || !message) {
+                showNotification('Lütfen zorunlu alanları doldurun', 'error');
+                return;
+            }
+            
+            // Email formatı kontrolü
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Geçerli bir e-posta adresi giriniz', 'error');
+                return;
+            }
+            
+            // Başarılı form gönderimi simülasyonu
+            showNotification('Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.', 'success');
+            helpForm.reset();
+        });
+    }
+    
+    // Bildirim fonksiyonu
+    function showNotification(message, type) {
+        // Mevcut bildirimleri kaldır
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => {
+            notification.remove();
+        });
+        
+        // Yeni bildirim oluştur
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        
+        // Stil ekle
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.right = '20px';
+        notification.style.padding = '15px 25px';
+        notification.style.borderRadius = '4px';
+        notification.style.fontSize = '16px';
+        notification.style.zIndex = '1000';
+        notification.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+        notification.style.transition = 'all 0.3s ease';
+        
+        if (type === 'success') {
+            notification.style.backgroundColor = '#004c8c';
+            notification.style.color = 'white';
+        } else {
+            notification.style.backgroundColor = '#ff3860';
+            notification.style.color = 'white';
+        }
+        
+        // Sayfaya ekle
+        document.body.appendChild(notification);
+        
+        // 5 saniye sonra kaldır
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 5000);
+    }
+});
+
+// 3. Ofisler Arası Geçiş Animasyonu
+document.addEventListener('DOMContentLoaded', function() {
+    const officeLocations = document.querySelectorAll('.office-location');
+    
+    officeLocations.forEach(location => {
+        location.addEventListener('mouseenter', function() {
+            // Diğer lokasyonların opasitesini azalt
+            officeLocations.forEach(otherLocation => {
+                if (otherLocation !== this) {
+                    otherLocation.style.opacity = '0.5';
+                    otherLocation.style.transition = 'opacity 0.3s ease';
+                }
+            });
+            
+            // Aktif lokasyonun noktasını büyüt
+            const dot = this.querySelector('.location-dot');
+            dot.style.transform = 'scale(1.5)';
+            dot.style.backgroundColor = '#2a5c96';
+            dot.style.borderColor = '#ffffff';
+        });
+        
+        location.addEventListener('mouseleave', function() {
+            // Tüm lokasyonların opasitesini normale döndür
+            officeLocations.forEach(otherLocation => {
+                otherLocation.style.opacity = '1';
+            });
+            
+            // Noktayı normale döndür
+            const dot = this.querySelector('.location-dot');
+            dot.style.transform = 'scale(1)';
+            dot.style.backgroundColor = 'white';
+            dot.style.borderColor = '#2a5c96';
+        });
+    });
+});
+
+// 4. Navbar Scroll Efekti
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        
+        if (window.scrollY > 100) {
+            header.style.padding = '10px 0';
+            header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+            header.style.transition = 'all 0.3s ease';
+        } else {
+            header.style.padding = '15px 0';
+            header.style.boxShadow = 'none';
+        }
+    });
+});
+
+// 5. Hizmet Teklifi Kalkülatörü
+document.addEventListener('DOMContentLoaded', function() {
+    // Kalkülatör UI ekleme
+    const helpSection = document.querySelector('.help-content');
+    
+    if (helpSection) {
+        // Kalkülatör konteynerı oluştur
+        const calculatorContainer = document.createElement('div');
+        calculatorContainer.className = 'calculator-container';
+        calculatorContainer.style.backgroundColor = 'white';
+        calculatorContainer.style.padding = '20px';
+        calculatorContainer.style.borderRadius = '8px';
+        calculatorContainer.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+        calculatorContainer.style.margin = '40px auto';
+        calculatorContainer.style.maxWidth = '600px';
+        
+        // Kalkülatör başlığı
+        const calculatorTitle = document.createElement('h3');
+        calculatorTitle.textContent = 'Hızlı Maliyet Hesaplama';
+        calculatorTitle.style.color = '#004c8c';
+        calculatorTitle.style.marginBottom = '20px';
+        calculatorTitle.style.textAlign = 'center';
+        
+        // Kalkülatör formu
+        const calculatorForm = document.createElement('div');
+        calculatorForm.innerHTML = `
+            <div class="calc-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #004c8c; font-weight: bold;">Taşıma Tipi</label>
+                <select id="shipping-type" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+                    <option value="road">Kara Taşımacılığı</option>
+                    <option value="sea">Deniz Taşımacılığı</option>
+                    <option value="air">Hava Taşımacılığı</option>
+                </select>
+            </div>
+            
+            <div class="calc-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #004c8c; font-weight: bold;">Mesafe (km)</label>
+                <input type="number" id="distance" min="1" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+            </div>
+            
+            <div class="calc-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #004c8c; font-weight: bold;">Ağırlık (kg)</label>
+                <input type="number" id="weight" min="1" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+            </div>
+            
+            <button id="calculate-btn" style="background-color: #004c8c; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold;">Hesapla</button>
+            
+            <div id="result" style="margin-top: 20px; padding: 15px; border-radius: 4px; text-align: center; display: none;"></div>
+        `;
+        
+        // Kalkülatörü sayfaya ekle
+        calculatorContainer.appendChild(calculatorTitle);
+        calculatorContainer.appendChild(calculatorForm);
+        
+        // Help Section'ın sonuna ekle
+        document.querySelector('.help .container').appendChild(calculatorContainer);
+        
+        // Hesaplama fonksiyonu
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const shippingType = document.getElementById('shipping-type').value;
+            const distance = parseFloat(document.getElementById('distance').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            // Değerleri kontrol et
+            if (isNaN(distance) || isNaN(weight) || distance <= 0 || weight <= 0) {
+                showResult('Lütfen geçerli mesafe ve ağırlık değerleri girin.', 'error');
+                return;
+            }
+            
+            // Basit hesaplama
+            let baseRate;
+            switch (shippingType) {
+                case 'road':
+                    baseRate = 0.5;
+                    break;
+                case 'sea':
+                    baseRate = 0.3;
+                    break;
+                case 'air':
+                    baseRate = 1.2;
+                    break;
+                default:
+                    baseRate = 0.5;
+            }
+            
+            const estimatedCost = (distance * weight * baseRate).toFixed(2);
+            
+            // Sonucu göster
+            showResult(`Tahmini maliyet: ${estimatedCost} TL`, 'success');
+        });
+        
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                resultDiv.style.backgroundColor = '#e6f7ff';
+                resultDiv.style.color = '#004c8c';
+                resultDiv.style.border = '1px solid #b3d7ff';
+            } else {
+                resultDiv.style.backgroundColor = '#ffe6e6';
+                resultDiv.style.color = '#cc0000';
+                resultDiv.style.border = '1px solid #ffb3b3';
+            }
+        }
+    }
+});
+
+// 6. Hizmet Kartlarına Tıklama Özelliği
+document.addEventListener('DOMContentLoaded', function() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        
+        card.addEventListener('click', function() {
+            const serviceTitle = this.querySelector('h3').textContent;
+            
+            // URL oluşturalım (hizmetlerimiz sayfasına yönlendirme)
+            const serviceUrl = 'hizmetlerimiz-page.html' + '#' + serviceTitle.toLowerCase().replace(/\s+/g, '-');
+            
+            // Yönlendirme yapalım
+            window.location.href = serviceUrl;
+        });
+    });
+});
+    </script>
 </body>
 </html>
