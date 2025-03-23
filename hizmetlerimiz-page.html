@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Logistics - Hizmetlerimiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: #004c8c;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-icon i {
+            color: #004c8c;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Page Title Section */
+        .page-title {
+            background-color: #004c8c;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #003a6b, #0077cc, #003a6b);
+        }
+
+        .page-title h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Company History Section */
+        .history {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #004c8c;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #004c8c;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .history-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .history-image {
+            height: 500px;
+            background-image: url('hizmetlerimiz.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 76, 140, 0.4), transparent);
+        }
+
+        .history-text h2 {
+            color: #004c8c;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .history-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .history-milestones {
+            margin-top: 40px;
+        }
+
+        .milestone {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .milestone-year {
+            font-weight: bold;
+            color: #004c8c;
+            min-width: 80px;
+            font-size: 18px;
+        }
+
+        .milestone-text {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .milestone-text::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #004c8c;
+            border-radius: 50%;
+        }
+
+        /* Services Detail Section */
+        .services-detail {
+            padding: 80px 0;
+            background-color: #e6f2ff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-detail-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-detail-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            color: #004c8c;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .service-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .service-features {
+            margin-top: 20px;
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feature-icon {
+            color: #004c8c;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+        }
+
+        .benefits-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .benefits-image {
+            height: 400px;
+            background-image: url('hizmetlerimiz-avantajları.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefits-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f5f9ff;
+            transition: transform 0.3s;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            height: 60px;
+            width: 60px;
+            background-color: #e6f2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .benefit-icon i {
+            color: #004c8c;
+            font-size: 24px;
+        }
+
+        .benefit-item h3 {
+            color: #004c8c;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .benefit-item p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Call to Action */
+        .cta {
+            padding: 80px 0;
+            background-color: #004c8c;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: white;
+            color: #004c8c;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #004c8c;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column ul li a {
+            color: #b3d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .history-content,
+            .benefits-container {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-items {
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .page-title {
+                padding: 40px 0;
+            }
+
+            .page-title h1 {
+                font-size: 32px;
+            }
+
+            .benefits-items {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-container {
+                padding: 30px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="logo-text">My Logistics</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="mylogistics-updatedd-website.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html" class="active">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title Section -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Hizmetlerimiz</h1>
+            <p>My Logistics olarak tüm lojistik ihtiyaçlarınız için güvenilir ve profesyonel çözümler sunuyoruz.</p>
+        </div>
+    </section>
+
+    <!-- Company History Section -->
+    <section class="history">
+        <div class="container">
+            <h2 class="section-title">Firmamızın Tarihçesi</h2>
+            <div class="history-content">
+                <div class="history-image"></div>
+                <div class="history-text">
+                    <h2>20 Yıllık Lojistik Deneyimi</h2>
+                    <p>My Logistics, 2005 yılında Konya'da kurulan ve bugün Türkiye'nin önde gelen lojistik firmalarından biri haline gelen, sektörün öncü şirketlerinden biridir. Kurulduğumuz günden bu yana, kaliteli hizmet anlayışımız ve müşteri memnuniyetine verdiğimiz önem ile sürekli büyümeye devam ettik.</p>
+                    <p>İlk olarak karayolu taşımacılığı ile sektöre adım atan firmamız, zamanla deniz ve hava taşımacılığı ile depolama hizmetlerini de bünyesine katarak tam entegre lojistik çözümler sunan bir yapıya kavuşmuştur.</p>
+                    
+                    <div class="history-milestones">
+                        <div class="milestone">
+                            <div class="milestone-year">2005</div>
+                            <div class="milestone-text">My Logistics'in Konya'da kurulması ve ilk karayolu taşımacılık operasyonlarının başlaması</div>
+                        </div>
+                        <div class="milestone">
+                            <div class="milestone-year">2010</div>
+                            <div class="milestone-text">Deniz taşımacılığı operasyonlarının başlaması ve Ankara ofisinin açılması</div>
+                        </div>
+                        <div class="milestone">
+                            <div class="milestone-year">2015</div>
+                            <div class="milestone-text">Hava kargo hizmetleri ve modern depolama tesislerinin faaliyete geçmesi</div>
+                        </div>
+                        <div class="milestone">
+                            <div class="milestone-year">2020</div>
+                            <div class="milestone-text">Teknolojik alt yapının güçlendirilmesi ve Aksaray, Kırşehir ve Kırıkkale'de yeni ofislerin açılması</div>
+                        </div>
+                        <div class="milestone">
+                            <div class="milestone-year">2025</div>
+                            <div class="milestone-text">Sürdürülebilir ve çevre dostu lojistik projeleri ile sektörde öncü konuma yükselme</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Detail Section -->
+    <section class="services-detail">
+        <div class="container">
+            <h2 class="section-title">Lojistik Çözümlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-detail-card">
+                    <div class="service-image" style="background-image: url('karataşımacılığı.jpg')"></div>
+                    <div class="service-content">
+                        <h3>Kara Taşımacılığı</h3>
+                        <p>Ulusal ve uluslararası karayolu taşımacılığında, modern araç filomuz ve deneyimli personelimiz ile tam zamanında teslimat garantisi sunuyoruz.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Komple ve parsiyel taşıma hizmetleri</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Özel taşıma çözümleri (ADR, ısı kontrollü)</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>7/24 araç ve yük takip sistemi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image" style="background-image: url('denizyolutaşımacılığı.jpg')"></div>
+                    <div class="service-content">
+                        <h3>Deniz Taşımacılığı</h3>
+                        <p>Global ticaret ağınızı genişletmek için güvenilir ve ekonomik deniz taşımacılığı çözümleri sunuyoruz.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>FCL ve LCL konteyner taşımacılığı</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Proje kargo ve ağır yük taşımacılığı</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Uluslararası limanlar arası taşıma</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image" style="background-image: url('havayolutaşımacılığı.jpeg')"></div>
+                    <div class="service-content">
+                        <h3>Hava Taşımacılığı</h3>
+                        <p>Acil ve zaman hassasiyeti olan gönderileriniz için hızlı ve güvenilir hava kargo çözümleri sağlıyoruz.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Ekspres ve standard hava kargo hizmetleri</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Özel kargo taşıma (soğuk zincir, değerli yük)</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Charter uçak organizasyonu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image" style="background-image: url('depolamataşımacılığı.jpg')"></div>
+                    <div class="service-content">
+                        <h3>Depolama Hizmetleri</h3>
+                        <p>Modern ve güvenli depolama tesislerimizde envanterinizi etkin şekilde yönetiyor ve ihtiyaçlarınıza özel çözümler sunuyoruz.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Gümrüklü ve gümrüksüz depolama</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Sıcaklık kontrollü depolama</div>
+                            </div>
+                            <div class="service-feature">
+                                <i class="fas fa-check feature-icon"></i>
+                                <div>Envanter yönetimi ve sipariş toplama</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">My Logistics'in Size Sunduğu Avantajlar</h2>
+
+            <div class="benefits-container">
+                <div class="benefits-items">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Güvenilirlik</h3>
+                        <p>20 yıllık sektör deneyimi ile güvenle tercih edilen bir lojistik partneriyiz.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Geniş Ağ</h3>
+                        <p>Türkiye genelinde 5 ofis ve global taşıma ağı ile her noktaya ulaşım.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Maliyet Verimliliği</h3>
+                        <p>Optimize edilmiş süreçler sayesinde avantajlı fiyatlandırma seçenekleri.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>7/24 Destek</h3>
+                        <p>Uzman ekibimiz her an yanınızda, tüm sorularınıza hızlı çözümler sunuyoruz.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-truck-loading"></i>
+                        </div>
+                        <h3>Özel Çözümler</h3>
+                        <p>Her müşterinin ihtiyacına özel tasarlanmış lojistik hizmetleri.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Sürdürülebilirlik</h3>
+                        <p>Çevre dostu lojistik yaklaşımı ile karbon ayak izini azaltma.</p>
+                    </div>
+                </div>
+                <div class="benefits-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Sizin İçin En İyi Lojistik Çözümleri</h2>
+            <p>Ticari faaliyetleriniz için özel olarak tasarlanmış lojistik çözümlerimiz hakkında daha fazla bilgi edinmek için bizimle iletişime geçin.</p>
+            <a href="#" class="cta-btn">Bizimle İletişime Geçin</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Mustafa Yılmaz</h3>
+                    <p>Lojistik sektörünün öncü firması olarak tüm taşımacılık ve lojistik ihtiyaçlarınızda yanınızdayız.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="mylogistics-updatedd-website.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ofislerimiz</h3>
+                    <ul>
+                        <li><a href="offices-page.html">Konya</a></li>
+                        <li><a href="offices-page.html">Aksaray</a></li>
+                        <li><a href="offices-page.html">Kırşehir</a></li>
+                        <li><a href="offices-page.html">Kırıkkale</a></li>
+                        <li><a href="offices-page.html">Ankara</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>İletişim Bilgileri</h3>
+                    <p>Adres: Lojistik Caddesi, Organize Sanayi Bölgesi, Konya</p>
+                    <p>Telefon: +90 (506) 131 87 95 </p>
+                    <p>E-posta: ylmzmustafa4@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 My Logistics. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
