@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Logistics - İnsan Kaynakları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: #004c8c;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-icon i {
+            color: #004c8c;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        /* Hero Section for HR */
+        .hr-hero {
+            height: 400px;
+            background-image: url('insankaynakları-arkaplan.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .hr-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 46, 84, 0.6);
+        }
+        
+        .hr-hero-content {
+            color: white;
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+            max-width: 800px;
+        }
+        
+        .hr-hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hr-hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* HR Philosophy Section */
+        .hr-philosophy {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #004c8c;
+        }
+        
+        .hr-philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .hr-philosophy-image {
+            height: 400px;
+            background-image: url('Insan-Kaynaklari.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 76, 140, 0.2);
+        }
+        
+        .hr-philosophy-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .hr-philosophy-text h3 {
+            color: #004c8c;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .hr-philosophy-text p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 60px 0;
+            background-color: #e6f2ff;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #e6f2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        
+        .benefit-icon i {
+            color: #004c8c;
+            font-size: 28px;
+        }
+        
+        .benefit-card h3 {
+            margin-bottom: 15px;
+            color: #004c8c;
+        }
+        
+        /* Open Positions Section */
+        .positions {
+            padding: 60px 0;
+            background-color: #f5f9ff;
+        }
+        
+        .positions-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .position-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .position-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .position-info h3 {
+            color: #004c8c;
+            margin-bottom: 10px;
+        }
+        
+        .position-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .position-meta div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .position-meta i {
+            color: #004c8c;
+        }
+        
+        .position-card .apply-btn {
+            background-color: #004c8c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        .position-card .apply-btn:hover {
+            background-color: #003a6b;
+        }
+        
+        /* Application Form Section */
+        .application {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f5f9ff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #004c8c;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #004c8c;
+            box-shadow: 0 0 0 3px rgba(0, 76, 140, 0.1);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .file-input {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .file-input label {
+            margin-bottom: 10px;
+        }
+        
+        .file-input-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #e6f2ff;
+            color: #004c8c;
+            border: 1px dashed #004c8c;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-button:hover {
+            background-color: #d1e6ff;
+        }
+        
+        .file-input-button i {
+            margin-right: 10px;
+        }
+        
+        .file-input input[type="file"] {
+            display: none;
+        }
+        
+        .submit-btn {
+            background-color: #004c8c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            background-color: #003a6b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #004c8c;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column ul li a {
+            color: #b3d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hr-philosophy-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hr-philosophy-image {
+                order: -1;
+                height: 300px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .position-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .position-meta {
+                justify-content: center;
+            }
+            
+            .position-card .apply-btn {
+                margin-top: 15px;
+            }
+            
+            .hr-hero-content h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="logo-text">My Logistics</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="mylogistics-updatedd-website.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html" class="active">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section for HR -->
+    <section class="hr-hero">
+        <div class="hr-hero-content">
+            <h1>Ekibimize Katılın</h1>
+            <p>My Logistics ailesi olarak yenilikçi, dinamik ve takım çalışmasına değer veren profesyonelleri aramıza katılmaya davet ediyoruz.</p>
+        </div>
+    </section>
+    
+    <!-- HR Philosophy Section -->
+    <section class="hr-philosophy">
+        <div class="container">
+            <h2 class="section-title">İnsan Kaynakları Felsefemiz</h2>
+            
+            <div class="hr-philosophy-content">
+                <div class="hr-philosophy-text">
+                    <h3>Değerlerimiz</h3>
+                    <p>My Logistics olarak, çalışanlarımızın potansiyellerini en üst düzeyde gerçekleştirmeleri için gerekli ortamı sağlamayı hedefliyoruz. Yenilikçi, şeffaf ve işbirlikçi bir kurum kültürü içinde, sürekli gelişim ve öğrenmeyi destekliyoruz.</p>
+                    
+                    <h3>Yaklaşımımız</h3>
+                    <p>Yetenek yönetimimizde, çalışanlarımızın hem teknik hem de kişisel gelişimine önem veriyoruz. Şirket içi eğitimler, mentorluk programları ve kariyer gelişim planları ile çalışanlarımızın profesyonel yolculuklarına destek oluyoruz.</p>
+                    
+                    <h3>Hedefimiz</h3>
+                    <p>Lojistik sektöründe fark yaratacak, yenilikçi fikirler üretebilen, analitik düşünce yapısına sahip, müşteri odaklı ve takım çalışmasına yatkın yeteneklerle birlikte büyümeyi amaçlıyoruz.</p>
+                </div>
+                <div class="hr-philosophy-image"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Çalışan Avantajlarımız</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Sürekli Gelişim</h3>
+                    <p>Sektörel eğitimler, yabancı dil kursları ve kişisel gelişim programları ile kariyer yolculuğunuzu destekliyoruz.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Kariyer Fırsatları</h3>
+                    <p>Yurtiçi ve yurtdışı ofislerimizde kariyer fırsatları ve yükselme imkanları sunuyoruz.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Sağlık Sigortası</h3>
+                    <p>Kapsamlı özel sağlık sigortası ile siz ve aileniz için güvence sağlıyoruz.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Sosyal Aktiviteler</h3>
+                    <p>Takım ruhumuzu güçlendiren sosyal etkinlikler ve organizasyonlar düzenliyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Open Positions Section -->
+    <section class="positions">
+        <div class="container">
+            <h2 class="section-title">Açık Pozisyonlarımız</h2>
+            
+            <div class="positions-list">
+                <div class="position-card">
+                    <div class="position-info">
+                        <h3>Lojistik Operasyon Uzmanı</h3>
+                        <div class="position-meta">
+                            <div><i class="fas fa-map-marker-alt"></i> Konya</div>
+                            <div><i class="fas fa-briefcase"></i> Tam Zamanlı</div>
+                            <div><i class="fas fa-clock"></i> 2+ Yıl Deneyim</div>
+                        </div>
+                        <p>Uluslararası lojistik operasyonlarının koordinasyonu ve müşteri iletişiminde görev alacak, İngilizce bilen operasyon uzmanı arıyoruz.</p>
+                    </div>
+                    <button class="apply-btn">Başvur</button>
+                </div>
+                
+                <div class="position-card">
+                    <div class="position-info">
+                        <h3>Satış Uzmanı</h3>
+                        <div class="position-meta">
+                            <div><i class="fas fa-map-marker-alt"></i> Ankara</div>
+                            <div><i class="fas fa-briefcase"></i> Tam Zamanlı</div>
+                            <div><i class="fas fa-clock"></i> 3+ Yıl Deneyim</div>
+                        </div>
+                        <p>Müşteri portföyünü genişletecek, sektör tecrübesi olan, analitik düşünce yapısına sahip satış uzmanı arıyoruz.</p>
+                    </div>
+                    <button class="apply-btn">Başvur</button>
+                </div>
+                
+                <div class="position-card">
+                    <div class="position-info">
+                        <h3>Depo Sorumlusu</h3>
+                        <div class="position-meta">
+                            <div><i class="fas fa-map-marker-alt"></i> Konya</div>
+                            <div><i class="fas fa-briefcase"></i> Tam Zamanlı</div>
+                            <div><i class="fas fa-clock"></i> 5+ Yıl Deneyim</div>
+                        </div>
+                        <p>Depo operasyonlarını yönetecek, stok takibi ve sevkiyat süreçlerinde tecrübeli depo sorumlusu arıyoruz.</p>
+                    </div>
+                    <button class="apply-btn">Başvur</button>
+                </div>
+                
+                <div class="position-card">
+                    <div class="position-info">
+                        <h3>Müşteri İlişkileri Uzmanı</h3>
+                        <div class="position-meta">
+                            <div><i class="fas fa-map-marker-alt"></i> Ankara</div>
+                            <div><i class="fas fa-briefcase"></i> Tam Zamanlı</div>
+                            <div><i class="fas fa-clock"></i> 1+ Yıl Deneyim</div>
+                        </div>
+                        <p>Müşteri iletişimini güçlendirecek, çözüm odaklı, iletişim becerileri güçlü müşteri ilişkileri uzmanı arıyoruz.</p>
+                    </div>
+                    <button class="apply-btn">Başvur</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Application Form Section -->
+    <section class="application">
+        <div class="container">
+            <h2 class="section-title">İş Başvuru Formu</h2>
+            
+            <div class="application-form">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Adınız</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="surname">Soyadınız</label>
+                            <input type="text" id="surname" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Başvurmak İstediğiniz Pozisyon</label>
+                        <select id="position" required>
+                            <option value="" selected disabled>Seçiniz</option>
+                            <option value="lojistik">Lojistik Operasyon Uzmanı</option>
+                            <option value="satis">Satış Uzmanı</option>
+                            <option value="depo">Depo Sorumlusu</option>
+                            <option value="musteri">Müşteri İlişkileri Uzmanı</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">İş Deneyimi</label>
+                        <textarea id="experience" placeholder="Önceki iş deneyimlerinizi ve görevlerinizi kısaca anlatın."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="education">Eğitim Bilgileri</label>
+                        <textarea id="education" placeholder="Eğitim geçmişinizi kısaca paylaşın."></textarea>
+                    </div>
+                    
+                    <div class="form-group file-input">
+                        <label>CV Yükle</label>
+                        <label for="cv" class="file-input-button">
+                            <i class="fas fa-upload"></i> Dosya Seç (PDF veya Word)
+                        </label>
+                        <input type="file" id="cv" accept=".pdf,.doc,.docx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Eklemek İstedikleriniz</label>
+                        <textarea id="message" placeholder="Başvurunuzla ilgili eklemek istediğiniz bilgiler..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Başvuruyu Gönder</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Mustafa Yılmaz</h3>
+                    <p>Lojistik sektörünün öncü firması olarak tüm taşımacılık ve lojistik ihtiyaçlarınızda yanınızdayız.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="mylogistics-updatedd-website.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ofislerimiz</h3>
+                    <ul>
+                        <li><a href="offices-page.html">Konya</a></li>
+                        <li><a href="offices-page.html">Aksaray</a></li>
+                        <li><a href="offices-page.html">Kırşehir</a></li>
+                        <li><a href="offices-page.html">Kırıkkale</a></li>
+                        <li><a href="offices-page.html">Ankara</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>İletişim Bilgileri</h3>
+                    <p>Adres: Lojistik Caddesi, Organize Sanayi Bölgesi, Konya</p>
+                    <p>Telefon: +90 (506) 131 87 95 </p>
+                    <p>E-posta: ylmzmustafa4@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 My Logistics. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
