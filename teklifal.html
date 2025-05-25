@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Logistics - Teklif Al</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: #004c8c;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-icon i {
+            color: #004c8c;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        /* Page Title */
+        .page-title {
+            background-color: #004c8c;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #003a6b, #2196f3, #003a6b);
+        }
+        
+        .page-title h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Quote Form Content */
+        .quote-content {
+            padding: 60px 0;
+        }
+        
+        .quote-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .quote-form-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quote-info-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #004c8c;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #004c8c;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e6f2ff;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #004c8c;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .submit-btn {
+            background-color: #004c8c;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #003a6b;
+        }
+        
+        /* Info Section */
+        .info-card {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .info-card h4 {
+            color: #004c8c;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h4 i {
+            margin-right: 8px;
+        }
+        
+        .info-card p {
+            margin-bottom: 8px;
+        }
+        
+        .advantages-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .advantages-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .advantages-list li i {
+            color: #004c8c;
+            margin-right: 10px;
+            width: 16px;
+        }
+        
+        /* Contact Section */
+        .contact-cta {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #e6f2ff;
+        }
+        
+        .cta-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #004c8c;
+            padding: 40px;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 76, 140, 0.3);
+        }
+        
+        .cta-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .cta-btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn-primary {
+            background-color: white;
+            color: #004c8c;
+        }
+        
+        .cta-btn-primary:hover {
+            background-color: #e6f2ff;
+        }
+        
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #004c8c;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column ul li a {
+            color: #b3d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .quote-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-title h1 {
+                font-size: 28px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="logo-text">My Logistics</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Teklif Al</h1>
+            <p>Lojistik ihtiyaçlarınız için özel teklif almak ve detaylı bilgi edinmek için formu doldurun. Uzman ekibimiz en kısa sürede sizinle iletişime geçecektir.</p>
+        </div>
+    </section>
+    
+    <!-- Quote Form Content -->
+    <section class="quote-content">
+        <div class="container">
+            <div class="quote-container">
+                <!-- Quote Form -->
+                <div class="quote-form-section">
+                    <h2 class="section-title"><i class="fas fa-file-contract"></i> Teklif Formu</h2>
+                    <form id="quoteForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Ad *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Soyad *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Şirket Adı</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Unvan</label>
+                                <input type="text" id="title" name="title">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Telefon *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-posta *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="serviceType">Hizmet Türü *</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Lütfen seçiniz</option>
+                                <option value="kara-tasimaciligi">Kara Taşımacılığı</option>
+                                <option value="deniz-tasimaciligi">Deniz Taşımacılığı</option>
+                                <option value="hava-tasimaciligi">Hava Taşımacılığı</option>
+                                <option value="depolama">Depolama Hizmetleri</option>
+                                <option value="gumruk">Gümrük İşlemleri</option>
+                                <option value="proje-kargo">Proje Kargo</option>
+                                <option value="e-ticaret">E-ticaret Lojistiği</option>
+                                <option value="soguk-zincir">Soğuk Zincir</option>
+                                <option value="diger">Diğer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="origin">Nereden *</label>
+                                <input type="text" id="origin" name="origin" placeholder="Çıkış noktası" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Nereye *</label>
+                                <input type="text" id="destination" name="destination" placeholder="Varış noktası" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Yaklaşık Ağırlık (kg)</label>
+                                <input type="number" id="weight" name="weight" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="volume">Yaklaşık Hacim (m³)</label>
+                                <input type="number" id="volume" name="volume" step="0.1" placeholder="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ek Hizmetler</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="insurance" name="services[]" value="sigorta">
+                                    <label for="insurance">Sigorta</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="packaging" name="services[]" value="ambalajlama">
+                                    <label for="packaging">Ambalajlama</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="assembly" name="services[]" value="montaj">
+                                    <label for="assembly">Montaj</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tracking" name="services[]" value="takip">
+                                    <label for="tracking">Kargo Takip</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">Aciliyet Durumu</label>
+                            <select id="urgency" name="urgency">
+                                <option value="normal">Normal</option>
+                                <option value="acil">Acil</option>
+                                <option value="cok-acil">Çok Acil</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Ek Bilgiler</label>
+                            <textarea id="message" name="message" placeholder="Özel gereksinimleriniz, teslim zamanı, kargo detayları vb. bilgileri buraya yazabilirsiniz..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Teklif Talebini Gönder
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Quote Info -->
+                <div class="quote-info-section">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> Teklif Süreci</h2>
+                    
+                    <!-- Fine-tuning Recommendations -->
+                    <div id="finetuningRecommendations" class="info-card" style="display: none; background: linear-gradient(135deg, #e6f7ff, #f0f9ff); border: 2px solid #004c8c;">
+                        <h4><i class="fas fa-brain"></i> Akıllı Öneriler</h4>
+                        <div id="recommendationContent"></div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-clock"></i> Hızlı Yanıt</h4>
+                        <p>Teklif talebinizi aldıktan sonra <strong>2 saat</strong> içinde size geri dönüş yapıyoruz.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-calculator"></i> Detaylı Hesaplama</h4>
+                        <p>Uzman ekibimiz tarafından <strong>özel olarak hesaplanmış</strong> en uygun fiyat teklifini alın.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-handshake"></i> Ücretsiz Danışmanlık</h4>
+                        <p>Lojistik ihtiyaçlarınız için <strong>ücretsiz uzman danışmanlığı</strong> hizmeti sunuyoruz.</p>
+                    </div>
+                    
+                    <h3 style="color: #004c8c; margin: 30px 0 15px 0;">Neden My Logistics?</h3>
+                    <ul class="advantages-list">
+                        <li><i class="fas fa-check"></i> 15+ yıl sektör deneyimi</li>
+                        <li><i class="fas fa-check"></i> Türkiye geneli geniş hizmet ağı</li>
+                        <li><i class="fas fa-check"></i> 7/24 müşteri hizmetleri</li>
+                        <li><i class="fas fa-check"></i> Gerçek zamanlı kargo takibi</li>
+                        <li><i class="fas fa-check"></i> Rekabetçi fiyatlar</li>
+                        <li><i class="fas fa-check"></i> Sigortalı taşımacılık</li>
+                        <li><i class="fas fa-check"></i> Profesyonel ekip</li>
+                        <li><i class="fas fa-check"></i> Zamanında teslimat garantisi</li>
+                    </ul>
+                    
+                    <div class="info-card" style="margin-top: 30px;">
+                        <h4><i class="fas fa-phone"></i> Acil Durumlar İçin</h4>
+                        <p>Acil taşımacılık ihtiyaçlarınız için direkt aramayı da tercih edebilirsiniz:</p>
+                        <p><strong>+90 (506) 131 87 95</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-container">
+                <h2 class="cta-title">Hemen İletişime Geçin</h2>
+                <p class="cta-text">Formu doldurmayı tercih etmiyorsanız, doğrudan bizimle iletişime geçebilir ve anında bilgi alabilirsiniz.</p>
+                <div class="cta-buttons">
+                    <a href="tel:+905061318795" class="cta-btn cta-btn-primary">Hemen Ara</a>
+                    <a href="iletisim-sayfasi.html" class="cta-btn cta-btn-secondary">İletişim Sayfası</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Mustafa Yılmaz</h3>
+                    <p>Lojistik sektörünün öncü firması olarak tüm taşımacılık ve lojistik ihtiyaçlarınızda yanınızdayız.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="hizmetlerimiz-page.html">Hizmetlerimiz</a></li>
+                        <li><a href="offices-page.html">Ofislerimiz</a></li>
+                        <li><a href="insan-kaynaklari-page.html">İnsan Kaynakları</a></li>
+                        <li><a href="iletisim-sayfasi.html">İletişim</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ofislerimiz</h3>
+                    <ul>
+                        <li><a href="offices-page.html">Konya</a></li>
+                        <li><a href="offices-page.html">Aksaray</a></li>
+                        <li><a href="offices-page.html">Kırşehir</a></li>
+                        <li><a href="offices-page.html">Kırıkkale</a></li>
+                        <li><a href="offices-page.html">Ankara</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>İletişim Bilgileri</h3>
+                    <p>Adres: Lojistik Caddesi, Organize Sanayi Bölgesi, Konya</p>
+                    <p>Telefon: +90 (506) 131 87 95</p>
+                    <p>E-posta: ylmzmustafa4@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 My Logistics. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fine-tuning system - Analyzes user input and provides smart recommendations
+        function provideFinetuningRecommendations() {
+            const serviceType = document.getElementById('serviceType').value;
+            const origin = document.getElementById('origin').value.toLowerCase();
+            const destination = document.getElementById('destination').value.toLowerCase();
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const volume = parseFloat(document.getElementById('volume').value) || 0;
+            const urgency = document.getElementById('urgency').value;
+            
+            let recommendations = [];
+            let estimatedPrice = 0;
+            let estimatedDays = 0;
+            
+            // Service-based fine-tuning
+            if (serviceType) {
+                switch(serviceType) {
+                    case 'kara-tasimaciligi':
+                        recommendations.push('✅ Kara taşımacılığı seçiminiz maliyet-etkili bir seçim');
+                        estimatedPrice = weight * 2.5 + volume * 45;
+                        estimatedDays = 1-3;
+                        if (weight > 1000) {
+                            recommendations.push('💡 1 tondan fazla yük için parsiyel taşıma daha ekonomik olabilir');
+                        }
+                        break;
+                    case 'hava-tasimaciligi':
+                        recommendations.push('⚡ Hava taşımacılığı hızlı teslimat için ideal seçim');
+                        estimatedPrice = weight * 15 + volume * 200;
+                        estimatedDays = 1-2;
+                        if (weight > 500) {
+                            recommendations.push('💡 Ağır yükler için kara+hava kombine taşıma öneririz');
+                        }
+                        break;
+                    case 'deniz-tasimaciligi':
+                        recommendations.push('💰 Deniz taşımacılığı büyük hacimler için en ekonomik seçim');
+                        estimatedPrice = weight * 1.2 + volume * 25;
+                        estimatedDays = 7-15;
+                        break;
+                }
+            }
+            
+            // Location-based fine-tuning
+            if (origin && destination) {
+                const cities = ['istanbul', 'ankara', 'izmir', 'konya', 'antalya', 'adana', 'bursa'];
+                const majorCities = cities.some(city => origin.includes(city) || destination.includes(city));
+                
+                if (majorCities) {
+                    recommendations.push('🏙️ Büyük şehirler arası taşıma - günlük sefer avantajı');
+                    estimatedDays = Math.max(1, estimatedDays - 1);
+                } else {
+                    recommendations.push('🚚 İl/ilçe taşıması için özel rotalar oluşturuyoruz');
+                }
+                
+                // International detection
+                const internationalKeywords = ['almanya', 'fransa', 'ingiltere', 'rusya', 'ukrayna', 'irak', 'iran'];
+                const isInternational = internationalKeywords.some(country => 
+                    origin.includes(country) || destination.includes(country)
+                );
+                
+                if (isInternational) {
+                    recommendations.push('🌍 Uluslararası taşıma - gümrük işlemleri dahil');
+                    recommendations.push('📋 TIR karnesi ve transit belgeleri organize ediyoruz');
+                    estimatedPrice *= 1.8;
+                    estimatedDays += 3;
+                }
+            }
+            
+            // Weight/Volume based fine-tuning
+            if (weight > 0 || volume > 0) {
+                const density = weight / volume;
+                
+                if (density > 300) {
+                    recommendations.push('⚖️ Yüksek yoğunluklu yük - özel taşıma ekipmanı öneriyoruz');
+                } else if (density < 50) {
+                    recommendations.push('📦 Hacimli hafif yük - paket optimizasyonu yapabiliriz');
+                }
+                
+                if (weight > 3000) {
+                    recommendations.push('🏗️ Ağır yük taşımacılığı - özel izin ve güzergah planlama');
+                    estimatedDays += 2;
+                }
+                
+                if (volume > 20) {
+                    recommendations.push('🚛 Büyük hacim - tam dorse yüklemesi öneriyoruz');
+                }
+            }
+            
+            // Urgency-based fine-tuning
+            if (urgency === 'acil' || urgency === 'cok-acil') {
+                recommendations.push('🚨 Acil teslimat - öncelikli işlem sırası');
+                if (urgency === 'cok-acil') {
+                    recommendations.push('⚡ Express hizmet - 24 saat içinde teslimat mümkün');
+                    estimatedPrice *= 1.5;
+                    estimatedDays = 1;
+                }
+            }
+            
+            // Additional services fine-tuning
+            const selectedServices = document.querySelectorAll('input[name="services[]"]:checked');
+            if (selectedServices.length > 0) {
+                recommendations.push(`🛡️ Seçtiğiniz ${selectedServices.length} ek hizmet pakete dahil edilecek`);
+            }
+            
+            // Price estimation
+            if (estimatedPrice > 0) {
+                recommendations.push(`💰 Tahmini maliyet: ${Math.round(estimatedPrice)} - ${Math.round(estimatedPrice * 1.3)} TL`);
+                recommendations.push(`⏱️ Tahmini teslimat: ${estimatedDays} gün`);
+            }
+            
+            // Display recommendations
+            if (recommendations.length > 0) {
+                const recommendationDiv = document.getElementById('finetuningRecommendations');
+                const contentDiv = document.getElementById('recommendationContent');
+                
+                contentDiv.innerHTML = recommendations.map(rec => `<p style="margin: 8px 0; padding: 5px 0;">${rec}</p>`).join('');
+                recommendationDiv.style.display = 'block';
+                
+                // Scroll to recommendations
+                recommendationDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        // Add event listeners for real-time fine-tuning
+        const fieldsToWatch = ['serviceType', 'origin', 'destination', 'weight', 'volume', 'urgency'];
+        fieldsToWatch.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('change', provideFinetuningRecommendations);
+                field.addEventListener('input', debounce(provideFinetuningRecommendations, 500));
+            }
+        });
+        
+        // Add listeners for checkboxes
+        document.querySelectorAll('input[name="services[]"]').forEach(checkbox => {
+            checkbox.addEventListener('change', provideFinetuningRecommendations);
+        });
+        
+        // Debounce function to avoid too frequent calls
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Form submission with fine-tuning data
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation
+            const requiredFields = ['firstName', 'lastName', 'phone', 'email', 'serviceType', 'origin', 'destination'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ff4444';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#e6f2ff';
+                }
+            });
+            
+            if (isValid) {
+                // Show fine-tuned confirmation
+                const serviceType = document.getElementById('serviceType').value;
+                const urgency = document.getElementById('urgency').value;
+                let confirmationMessage = 'Teklif talebiniz başarıyla gönderildi!\n\n';
+                
+                if (urgency === 'cok-acil') {
+                    confirmationMessage += '🚨 Çok acil talebiniz en yüksek öncelikle işleme alınacak.\n';
+                } else if (urgency === 'acil') {
+                    confirmationMessage += '⚡ Acil talebiniz öncelikli olarak değerlendirilecek.\n';
+                }
+                
+                confirmationMessage += 'Akıllı sistemimiz tarafından analiz edilen öneriler dikkate alınarak size özel teklif hazırlanacak.\n\n';
+                confirmationMessage += 'En kısa sürede size geri dönüş yapacağız!';
+                
+                alert(confirmationMessage);
+                this.reset();
+                document.getElementById('finetuningRecommendations').style.display = 'none';
+            } else {
+                alert('Lütfen tüm zorunlu alanları doldurun.');
+            }
+        });
+    </script>
+</body>
+</html>
